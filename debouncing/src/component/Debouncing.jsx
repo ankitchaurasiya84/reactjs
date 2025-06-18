@@ -53,16 +53,18 @@ const [a,setA]=useState("")
 const [ds,setDs]=useState("")
  
 useEffect(()=>{
-  setTimeout(()=>{
-    setDs(a)
+  const handler=setTimeout(()=>{
+setDs(a)
   },1000)
+return ()=>clearTimeout(handler)
+
 },[a])
 
-const filtered= useMemo(()=>{
+const filtered=useMemo(()=>{
+  return data.filter((item)=>item.dessert.toLowerCase().includes(ds.toLowerCase()))
 
-return data.filter((item)=>item.dessert.toLowerCase().includes(ds.toLowerCase()))
+},[data,ds])
 
-  },[ds,data])
 
   const updateddata=filtered.map((i)=>({
     ...i,
