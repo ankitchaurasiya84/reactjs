@@ -1,5 +1,5 @@
 import { Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material"
-import { useState,useMemo, useEffect } from "react"
+import { useState,useMemo, useEffect, useCallback } from "react"
 import CustomTable from "../CommanComponent/CustomTable"
 
 
@@ -60,10 +60,16 @@ return ()=>clearTimeout(handler)
 
 },[a])
 
-const filtered=useMemo(()=>{
+// const filtered=useMemo(()=>{
+//   return data.filter((item)=>item.dessert.toLowerCase().includes(ds.toLowerCase()))
+
+// },[data,ds])
+const filteredFunction=useCallback(()=>{
   return data.filter((item)=>item.dessert.toLowerCase().includes(ds.toLowerCase()))
 
 },[data,ds])
+const filtered=filteredFunction()
+
 
 
   const updateddata=filtered.map((i)=>({
